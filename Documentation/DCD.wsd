@@ -1,0 +1,85 @@
+@startuml Design Class Diagram for models
+
+namespace Rally.Models {
+    class AppUser {
+        + Id: int
+        + FirstName: string
+        + LastName: string
+        + Email: string
+        + Username: string
+        + Password: string
+        + Tracks: ICollection<Track>
+    }
+
+    class Track {
+        + Id: int
+        + Name: string
+        + Comment: string
+        + Location: string
+        + Date: DateTime
+        + AppUserId: int
+        + AppUser: AppUser
+        + CategoryId: int
+        + Category: Category
+        + Exercises: ICollection<Exercise>
+    }
+
+    class Exercise {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        + Id: int
+        + SignNumber: int
+        + Description: string
+        + Image: string
+        + Location: string
+        + Rotation: string
+        + Track: ICollection<Track>
+        + CategoryId: int
+        + Category: Category
+        + ExerciseType: ExerciseType
+        + Equipment: Equipment
+    }
+
+    enum ExerciseType {
+        Name
+    }
+
+    class Equipment {
+        + Id: int
+        + Image: string
+        + Rotation: string
+        + Location: string
+        + EquipmentType: EquipmentType
+        + Exercises: ICollection<Exercise>
+    }
+
+    enum EquipmentType {
+        Name
+    }
+
+    class Category {
+        + Id: int
+        + Type: CategoryType
+        + Rules: string
+        + NumberOfExercises: int
+        + Tracks: ICollection<Track>
+        + Exercises: ICollection<Exercise>
+    }
+
+    enum CategoryType {
+        Name
+    }
+
+    AppUser "1" -- "0..*" Track
+    Track "0..*" -- "1" Category
+    Track "0..*" -- "0..*" Exercise
+    Exercise "0..*" -- "1" Equipment
+    Exercise "0..*" -- "1" Category
+    Category "1" -- "1" CategoryType
+    Exercise "1" -- "1" ExerciseType
+    Equipment "1" -- "1" EquipmentType
+
+}
+
+
+
+@enduml
