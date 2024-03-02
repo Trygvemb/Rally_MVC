@@ -39,10 +39,6 @@ namespace Rally.Models {
         + Equipment: Equipment
     }
 
-    enum ExerciseType {
-        Name
-    }
-
     class Equipment {
         + Id: int
         + Image: string
@@ -50,10 +46,6 @@ namespace Rally.Models {
         + Location: string
         + EquipmentType: EquipmentType
         + Exercises: ICollection<Exercise>
-    }
-
-    enum EquipmentType {
-        Name
     }
 
     class Category {
@@ -65,8 +57,10 @@ namespace Rally.Models {
         + Exercises: ICollection<Exercise>
     }
 
-    enum CategoryType {
-        Name
+    class EnumValue {
+        + Id: int
+        + EnumType: string
+        + Name: string
     }
 
     AppUser "1" -- "0..*" Track
@@ -74,9 +68,9 @@ namespace Rally.Models {
     Track "0..*" -- "0..*" Exercise
     Exercise "0..*" -- "1" Equipment
     Exercise "0..*" -- "1" Category
-    Category "1" -- "1" CategoryType
-    Exercise "1" -- "1" ExerciseType
-    Equipment "1" -- "1" EquipmentType
+    Category "1" -- "1" EnumValue
+    Exercise "1" -- "1" EnumValue
+    Equipment "1" -- "1" EnumValue
 
 }
 

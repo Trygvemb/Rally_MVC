@@ -7,10 +7,6 @@ using System.Threading.Tasks;
 
 namespace MVC.Models
 {
-    public enum ExerciseType
-    {
-        Name
-    }
     public class Exercise
     {
         [Key]
@@ -22,7 +18,9 @@ namespace MVC.Models
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
         public ICollection<Track>? Tracks { get; set; }
-        public ExerciseType ExerciseType { get; set; }
+        [ForeignKey("EnumValues")]
+        public int ExerciseTypeId { get; set; }
+        public EnumValue? ExerciseType { get; set; }
         public Equipment? Equipment { get; set; }
     }
 }
