@@ -13,6 +13,8 @@ namespace MVC.Models
         public int Id { get; set; }
         public string? Rules { get; set; }
         public int NumberOfExercises { get; set; }
+
+        // Navigation Properties
         [ForeignKey("EnumValues")]
         public int CategoryTypeId { get; set; }
         public EnumValue? CategoryType { get; set; }

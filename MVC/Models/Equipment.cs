@@ -15,6 +15,8 @@ namespace MVC.Models
         public string? Image { get; set; }
         public string? Rotation { get; set; }
         public string? Location { get; set; }
+
+        // Navigation Properties
         [ForeignKey("EnumValues")]
         public int EquipmentTypeId { get; set; }
         public EnumValue? EquipmentType { get; set; }

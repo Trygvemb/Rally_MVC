@@ -15,10 +15,12 @@ namespace MVC.Models
         public string? Comment { get; set; }
         public string? Location { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
-        [ForeignKey("AppUser")]
-        public string? AppUserId { get; set; }       
-        public AppUser AppUser { get; set; }
-        [ForeignKey("Category")]
+
+        // Navigation Properties
+        [ForeignKey("AppUsers")]
+        public int AppUserId { get; set; }       
+        public AppUser? AppUser { get; set; }
+        [ForeignKey("Categories")]
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
         public ICollection<Exercise>? Exercises { get; set; }

@@ -14,13 +14,15 @@ namespace MVC.Models
         public int SignNumber { get; set; }
         public string? Description { get; set; }
         public string? Rotation { get; set; }
+
+        // Navigation Properties
         [ForeignKey("Categories")]
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
-        public ICollection<Track>? Tracks { get; set; }
         [ForeignKey("EnumValues")]
         public int ExerciseTypeId { get; set; }
         public EnumValue? ExerciseType { get; set; }
         public Equipment? Equipment { get; set; }
+        public ICollection<Track>? Tracks { get; set; }
     }
 }
