@@ -1,13 +1,7 @@
 @startuml Design Class Diagram for models
 
 namespace Rally.Models {
-    class AppUser {
-        + Id: int
-        + FirstName: string
-        + LastName: string
-        + Email: string
-        + Username: string
-        + Password: string
+    class User {
         + Tracks: ICollection<Track>
     }
 
@@ -17,11 +11,18 @@ namespace Rally.Models {
         + Comment: string
         + Location: string
         + Date: DateTime
-        + AppUserId: int
-        + AppUser: AppUser
-        + CategoryId: int
+        + User: User
         + Category: Category
-        + Exercises: ICollection<Exercise>
+        + Signs: ICollection<Sign>
+    }
+
+    class Sign {
+        + Id: int
+        + SignNumber: int
+        + Location: string
+        + Rotation: string
+        + Exercise: Exercise
+        + Track: Track
     }
 
     class Exercise {
@@ -30,47 +31,32 @@ namespace Rally.Models {
         + SignNumber: int
         + Description: string
         + Image: string
-        + Location: string
-        + Rotation: string
-        + Track: ICollection<Track>
-        + CategoryId: int
-        + Category: Category
-        + ExerciseType: ExerciseType
         + Equipment: Equipment
+        + Category: ICollection<Category>
     }
 
     class Equipment {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         + Id: int
         + Image: string
-        + Rotation: string
-        + Location: string
-        + EquipmentType: EquipmentType
         + Exercises: ICollection<Exercise>
     }
 
     class Category {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         + Id: int
         + Type: CategoryType
         + Rules: string
-        + NumberOfExercises: int
         + Tracks: ICollection<Track>
         + Exercises: ICollection<Exercise>
     }
 
-    class EnumValue {
-        + Id: int
-        + EnumType: string
-        + Name: string
-    }
-
-    AppUser "1" -- "0..*" Track
+    User "1" -- "0..*" Track
     Track "0..*" -- "1" Category
-    Track "0..*" -- "0..*" Exercise
+    Track "1" -- "0..*" Sign
+    Sign "0..*" -- "1" Exercise
     Exercise "0..*" -- "1" Equipment
-    Exercise "0..*" -- "1" Category
-    Category "1" -- "1" EnumValue
-    Exercise "1" -- "1" EnumValue
-    Equipment "1" -- "1" EnumValue
+    Category "0..*" -- "0..*" Exercise
 
 }
 
